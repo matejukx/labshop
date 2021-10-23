@@ -28,8 +28,8 @@ public class ClientService {
         return repository.findAll();
     }
 
-    public void create(Client entity) {
-        repository.save(entity);
+    public Client create(Client entity) {
+       return repository.save(entity);
     }
 
     public void delete(Client entity) {

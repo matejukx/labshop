@@ -28,8 +28,8 @@ public class OrderService {
         return repository.findAll();
     }
 
-    public void create(Order entity) {
-        repository.save(entity);
+    public Order create(Order entity) {
+        return repository.save(entity);
     }
 
     public void delete(Order entity) {
