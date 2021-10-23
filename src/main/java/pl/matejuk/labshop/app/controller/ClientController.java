@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import pl.matejuk.labshop.app.dto.CreateClientRequest;
-import pl.matejuk.labshop.app.dto.GetClientResponse;
-import pl.matejuk.labshop.app.dto.GetClientsResponse;
-import pl.matejuk.labshop.app.dto.UpdateClientRequest;
+import pl.matejuk.labshop.app.dto.*;
 import pl.matejuk.labshop.app.entity.Client;
+import pl.matejuk.labshop.app.entity.Order;
 import pl.matejuk.labshop.app.service.ClientService;
 import pl.matejuk.labshop.app.service.OrderService;
 
@@ -20,10 +18,12 @@ import java.util.UUID;
 public class ClientController {
 
     private final ClientService clientService;
+    private final OrderService orderService;
 
     @Autowired
     public ClientController(ClientService clientService, OrderService orderService){
         this.clientService = clientService;
+        this.orderService = orderService;
     }
 
     @GetMapping
@@ -36,6 +36,17 @@ public class ClientController {
         var clientEntity = this.clientService.find(id);
         return clientEntity.map(value -> ResponseEntity.ok(GetClientResponse.entityToDtoMapper().apply(value)))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("{id}/orders")
+    public ResponseEntity<GetOrdersResponse> getClientOrders(@PathVariable("id") UUID id){
+        var clientEntity = this.clientService.find(id);
+        if (clientEntity.isPresent()){
+            var orders = this.orderService.findAllByClient(clientEntity.get());
+            return ResponseEntity.ok(GetOrdersResponse.entityToDtoMapper().apply(orders));
+        }
+        else
+            return ResponseEntity.notFound().build();
     }
 
     @PostMapping

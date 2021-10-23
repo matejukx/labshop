@@ -2,6 +2,7 @@ package pl.matejuk.labshop.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.matejuk.labshop.app.entity.Client;
 import pl.matejuk.labshop.app.entity.Order;
 import pl.matejuk.labshop.app.repository.IOrderRepository;
 import pl.matejuk.labshop.app.repository.OrderRepository;
@@ -28,6 +29,8 @@ public class OrderService {
     public List<Order> findAll() {
         return repository.findAll();
     }
+
+    public List<Order> findAllByClient(Client client) { return repository.findAllByClient(client); }
 
     @Transactional
     public Order create(Order entity) {

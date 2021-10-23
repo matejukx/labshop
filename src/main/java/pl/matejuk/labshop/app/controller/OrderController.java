@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import pl.matejuk.labshop.app.dto.*;
-import pl.matejuk.labshop.app.entity.Client;
 import pl.matejuk.labshop.app.service.ClientService;
 import pl.matejuk.labshop.app.service.OrderService;
 
