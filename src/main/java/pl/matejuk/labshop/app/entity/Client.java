@@ -26,7 +26,7 @@ public class Client {
     @Column
     private String surname;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Order> orders;
 }

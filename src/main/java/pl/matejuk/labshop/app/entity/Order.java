@@ -20,9 +20,8 @@ public class Order {
     @GeneratedValue
     private UUID id;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "client")
-
     private Client client;
 
     @Column

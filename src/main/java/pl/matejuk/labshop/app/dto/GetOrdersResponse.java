@@ -31,7 +31,7 @@ public class GetOrdersResponse  {
     @Singular
     private List<Order> orders;
 
-    public static Function<Collection<Order>, GetOrdersResponse> entityToDtoMapper(){
+    public static Function<Collection<pl.matejuk.labshop.app.entity.Order>, GetOrdersResponse> entityToDtoMapper(){
         return orders -> {
             GetOrdersResponseBuilder response = GetOrdersResponse.builder();
             orders.stream()

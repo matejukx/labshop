@@ -6,6 +6,7 @@ import pl.matejuk.labshop.app.entity.Order;
 import pl.matejuk.labshop.app.repository.IOrderRepository;
 import pl.matejuk.labshop.app.repository.OrderRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,14 +29,17 @@ public class OrderService {
         return repository.findAll();
     }
 
+    @Transactional
     public Order create(Order entity) {
         return repository.save(entity);
     }
 
+    @Transactional
     public void delete(Order entity) {
         repository.delete(entity);
     }
 
+    @Transactional
     public void update(Order entity) {
         repository.save(entity);
     }

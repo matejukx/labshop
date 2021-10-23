@@ -6,6 +6,7 @@ import pl.matejuk.labshop.app.entity.Client;
 import pl.matejuk.labshop.app.repository.ClientRepository;
 import pl.matejuk.labshop.app.repository.IClientRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,14 +29,17 @@ public class ClientService {
         return repository.findAll();
     }
 
+    @Transactional
     public Client create(Client entity) {
        return repository.save(entity);
     }
 
+    @Transactional
     public void delete(Client entity) {
         repository.delete(entity);
     }
 
+    @Transactional
     public void update(Client entity) {
         repository.save(entity);
     }

@@ -7,10 +7,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 import pl.matejuk.labshop.app.dto.CreateClientRequest;
 import pl.matejuk.labshop.app.dto.GetClientResponse;
 import pl.matejuk.labshop.app.dto.GetClientsResponse;
+import pl.matejuk.labshop.app.dto.UpdateClientRequest;
 import pl.matejuk.labshop.app.entity.Client;
 import pl.matejuk.labshop.app.service.ClientService;
 import pl.matejuk.labshop.app.service.OrderService;
 
+import javax.transaction.Transactional;
 import java.util.UUID;
 
 @RestController
@@ -18,14 +20,11 @@ import java.util.UUID;
 public class ClientController {
 
     private final ClientService clientService;
-    private final OrderService orderService;
 
     @Autowired
     public ClientController(ClientService clientService, OrderService orderService){
         this.clientService = clientService;
-        this.orderService = orderService;
     }
-
 
     @GetMapping
     public ResponseEntity<GetClientsResponse> getClients(){
@@ -46,4 +45,24 @@ public class ClientController {
         return ResponseEntity.created(builder.pathSegment("api", "clients", "{id}").buildAndExpand(client.getId()).toUri()).build();
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<Void> updateClient(@RequestBody UpdateClientRequest request, @PathVariable("id") UUID id){
+        var client = this.clientService.find(id);
+        if (client.isPresent()){
+            UpdateClientRequest.dtoToEntityMapper().apply(client.get(), request);
+            this.clientService.update(client.get());
+            return ResponseEntity.accepted().build();
+        }
+        else return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteClient(@PathVariable("id") UUID id){
+        var client = this.clientService.find(id);
+        if (client.isPresent()){
+            this.clientService.delete(client.get());
+            return ResponseEntity.accepted().build();
+        }
+        else return ResponseEntity.notFound().build();
+    }
 }
