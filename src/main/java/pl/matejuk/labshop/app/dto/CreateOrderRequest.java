@@ -1,6 +1,12 @@
 package pl.matejuk.labshop.app.dto;
 
 import lombok.*;
+import pl.matejuk.labshop.app.entity.Client;
+import pl.matejuk.labshop.app.entity.Order;
+
+import java.time.LocalDate;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 @Getter
 @Setter
@@ -10,4 +16,16 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class CreateOrderRequest {
+    private int price;
+    private String description;
+
+    public static Function<CreateOrderRequest, Order> dtoToEntityMapper(
+            Supplier<Client> clientSupplier){
+        return createOrderRequest -> Order.builder()
+                .price(createOrderRequest.getPrice())
+                .description(createOrderRequest.getDescription())
+                .date(LocalDate.now())
+                .client(clientSupplier.get())
+                .build();
+    }
 }
