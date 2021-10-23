@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.matejuk.labshop.app.entity.Client;
 import pl.matejuk.labshop.app.repository.ClientRepository;
+import pl.matejuk.labshop.app.repository.IClientRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,15 +13,15 @@ import java.util.UUID;
 @Service
 public class ClientService {
 
-    private final ClientRepository repository;
+    private final IClientRepository repository;
 
     @Autowired
-    public ClientService(ClientRepository repository) {
+    public ClientService(IClientRepository repository) {
         this.repository = repository;
     }
 
     public Optional<Client> find(UUID id) {
-        return repository.find(id);
+        return repository.findById(id);
     }
 
     public List<Client> findAll() {
@@ -28,7 +29,7 @@ public class ClientService {
     }
 
     public void create(Client entity) {
-        repository.create(entity);
+        repository.save(entity);
     }
 
     public void delete(Client entity) {
@@ -36,6 +37,6 @@ public class ClientService {
     }
 
     public void update(Client entity) {
-        repository.update(entity);
+        repository.save(entity);
     }
 }

@@ -77,14 +77,12 @@ public class CommandLineHandler {
     }
 
     boolean addClient(){
-        var newId = UUID.randomUUID();
         System.out.println("Please enter client name:");
         var name = scanner.nextLine();
         System.out.println("Please enter client surname:");
         var surname = scanner.nextLine();
 
         Client client = Client.builder()
-                .id(newId)
                 .name(name)
                 .surname(surname)
                 .build();
@@ -96,6 +94,9 @@ public class CommandLineHandler {
     }
 
     boolean addOrder(){
+        System.out.println("Please enter the description");
+        var description =scanner.nextLine();
+
         System.out.println("Please enter the price");
         var price =Integer.parseInt(scanner.nextLine());
 
@@ -107,10 +108,10 @@ public class CommandLineHandler {
         client.ifPresentOrElse(
                 clientResult -> {
                     Order order = Order.builder()
-                            .id(UUID.randomUUID())
                             .price(price)
                             .date(LocalDate.now())
                             .client(clientResult)
+                            .description(description)
                             .build();
                     this.orderService.create(order);
                     System.out.println("Created new Order:");

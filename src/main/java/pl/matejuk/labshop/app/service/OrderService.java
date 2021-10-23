@@ -3,6 +3,7 @@ package pl.matejuk.labshop.app.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.matejuk.labshop.app.entity.Order;
+import pl.matejuk.labshop.app.repository.IOrderRepository;
 import pl.matejuk.labshop.app.repository.OrderRepository;
 
 import java.util.List;
@@ -12,15 +13,15 @@ import java.util.UUID;
 @Service
 public class OrderService {
 
-    private final OrderRepository repository;
+    private final IOrderRepository repository;
 
     @Autowired
-    public OrderService(OrderRepository repository) {
+    public OrderService(IOrderRepository repository) {
         this.repository = repository;
     }
 
     public Optional<Order> find(UUID id) {
-        return repository.find(id);
+        return repository.findById(id);
     }
 
     public List<Order> findAll() {
@@ -28,7 +29,7 @@ public class OrderService {
     }
 
     public void create(Order entity) {
-        repository.create(entity);
+        repository.save(entity);
     }
 
     public void delete(Order entity) {
@@ -36,6 +37,6 @@ public class OrderService {
     }
 
     public void update(Order entity) {
-        repository.update(entity);
+        repository.save(entity);
     }
 }
