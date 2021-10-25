@@ -9,8 +9,6 @@ import pl.matejuk.labshop.app.service.OrderService;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.UUID;
 
 @Component
 public class DataInitializer {
@@ -30,19 +28,19 @@ public class DataInitializer {
                 .name("Adam")
                 .surname("Sandler")
                 .build();
-        this.clientService.create(client1);
+        client1 = this.clientService.create(client1);
 
         Client client2 = Client.builder()
                 .name("Max")
                 .surname("Kolonko")
                 .build();
-        this.clientService.create(client2);
+        client2 = this.clientService.create(client2);
 
         Client client3 = Client.builder()
                 .name("Chuck")
                 .surname("Norris")
                 .build();
-        this.clientService.create(client3);
+        client3 = this.clientService.create(client3);
 
         Order order1 = Order.builder()
                 .price(120)
