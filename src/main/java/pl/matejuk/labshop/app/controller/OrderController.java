@@ -35,8 +35,9 @@ public class OrderController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("{id}")
-    public ResponseEntity<Void> createOrder(@PathVariable("id") UUID clientId,@RequestBody CreateOrderRequest request, UriComponentsBuilder builder){
+    @PostMapping()
+    public ResponseEntity<Void> createOrder(@RequestBody CreateOrderRequest request, UriComponentsBuilder builder){
+        var clientId = request.getClientId();
         var order = CreateOrderRequest
                 .dtoToEntityMapper(() -> this.clientService.find(clientId).orElse(null))
                 .apply(request);

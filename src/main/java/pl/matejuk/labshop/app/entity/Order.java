@@ -20,7 +20,7 @@ public class Order {
     @GeneratedValue
     private UUID id;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client")
     private Client client;
 

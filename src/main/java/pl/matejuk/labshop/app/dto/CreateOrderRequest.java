@@ -5,6 +5,7 @@ import pl.matejuk.labshop.app.entity.Client;
 import pl.matejuk.labshop.app.entity.Order;
 
 import java.time.LocalDate;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -16,6 +17,7 @@ import java.util.function.Supplier;
 @ToString
 @EqualsAndHashCode
 public class CreateOrderRequest {
+    private UUID clientId;
     private int price;
     private String description;
 
