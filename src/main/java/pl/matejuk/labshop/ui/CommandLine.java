@@ -3,10 +3,7 @@ package pl.matejuk.labshop.ui;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import pl.matejuk.labshop.app.service.ClientService;
-import pl.matejuk.labshop.app.service.OrderService;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 @Component
