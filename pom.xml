@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>labshop</name>
 	<description>Laboratory task 1</description>
+
 	<properties>
 		<java.version>11</java.version>
 	</properties>
